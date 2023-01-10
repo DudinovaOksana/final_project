@@ -89,8 +89,8 @@ def test_redirect_policy_privacy(open_rostelecom_page):
     # шаг 1
     policy_privacy_link = functions.find(driver, RostelecomAutorizationPage.POLICY_PRIVACY)
     policy_privacy_link.click()
-    check_redirect_to_policy_privacy = functions.find(driver, PolicyPrivacy.POLICY_PRIVACY)
     current_url = driver.switch_to.window(driver.window_handles[1])
+    check_redirect_to_policy_privacy = functions.find(driver, PolicyPrivacy.POLICY_PRIVACY)
     assert driver.current_url == "https://b2c.passport.rt.ru/sso-static/agreement/agreement.html"
 
 #ТК-05
