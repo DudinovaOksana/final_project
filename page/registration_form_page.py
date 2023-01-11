@@ -11,5 +11,5 @@ class RegistrationFormPage:
     PASSWORD_CONFIRM = (By.XPATH, "//input[@id='password-confirm']")
     REGISTER_BUTTON = (By.XPATH, "//button[@type='submit']")
     ERROR_MESSAGE = (By.XPATH, "//span[@class='rt-input-container__meta rt-input-container__meta--error']")
-    NAME_ERROR_MESSAGE = (By.XPATH, '//*[@id="page-right"]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/span[1]')
+    NAME_ERROR_MESSAGE = (By.XPATH, '//span[@class="rt-input-container__meta rt-input-container__meta--error"]')
     INVALID_ACCAUNT_NUMBER_ERROR_MESSAGE = (By.XPATH, '//*[@id="page-right"]/div[1]/div[1]/div[1]/form[1]/div[4]/div[1]/span[1]')

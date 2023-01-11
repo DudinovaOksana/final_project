@@ -4,7 +4,6 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from page.rostelecom_authorization_page import RostelecomAuthorizationPage
 from page.email_confirmation_page import SubmitEmail
-from page.redirect_uri_page import RedirectURI
 from test import functions
 from page.policy_privacy_page import PolicyPrivacy
 from page.VK_page import VK
@@ -151,8 +150,8 @@ def test_user_registration_with_name_3_characters_password_14_characters(open_ro
 
     # шаг 8
     register_button = functions.find(driver, RegistrationFormPage.REGISTER_BUTTON).click()
-    check_phone_text = functions.find(driver, SubmitEmail.EMAIL_CONFIRMATION)
-    assert check_phone_text.text == "Подтверждение email"
+    check_email_text = functions.find(driver, SubmitEmail.EMAIL_CONFIRMATION)
+    assert check_email_text.text == "Подтверждение email"
 
 
 # ТК-06
@@ -294,7 +293,6 @@ def test_user_registration_with_name_1_character_negative(open_rostelecom_page):
 
     # шаг 8
     register_button = functions.find(driver, RegistrationFormPage.REGISTER_BUTTON).click()
-    check_phone_text = functions.find(driver, SubmitEmail.EMAIL_CONFIRMATION)
     check_error_message = functions.find(driver, RegistrationFormPage.NAME_ERROR_MESSAGE)
     assert check_error_message.text == "Необходимо заполнить поле кириллицей. От 2 до 30 символов."
 
@@ -378,22 +376,164 @@ def test_yandex_ru_redirect(open_rostelecom_page):
 
 
 # ТК-16
-def test_authorization_using_login(open_rostelecom_page):
+def test_user_registration_with_name_29_characterss(open_rostelecom_page):
     driver = open_rostelecom_page
 
     # шаг 1
-    login_tab = functions.find(driver, RostelecomAuthorizationPage.LOGIN_TAB)
-    login_tab.click()
+    register_link = functions.find(driver, RostelecomAuthorizationPage.REGISTRATION_LINK)
+    register_link.click()
 
     # шаг 2
-    email_input = functions.find(driver, RostelecomAuthorizationPage.EMAIL)
-    email_input.send_keys('ivan-ivanov-2023ivanov@yandex.ru')
+    name = functions.find(driver, RegistrationFormPage.NAME)
+    name.send_keys("Вамавывывывывывкуукукавамсмав")
 
     # шаг 3
-    password_input = functions.find(driver, RostelecomAuthorizationPage.PASSWORD)
-    password_input.send_keys('Qwertyuiop_1287')
+    surname = functions.find(driver, RegistrationFormPage.SURNAME)
+    surname.send_keys('Павлов')
 
     # шаг 4
-    enter_button = functions.find(driver, RostelecomAuthorizationPage.ENTER_BUTTON)
-    enter_button.click()
-    assert "https://b2c.passport.rt.ru/account_b2c/page?state=" in driver.current_url
+    region = functions.find(driver, RegistrationFormPage.REGION_INPUT)
+    region.send_keys("Москва")
+    region_select = functions.find(driver, RegistrationFormPage.REGION_SELECT)
+    region_select.click()
+
+    # шаг 5
+    email = functions.get_random_string(8) + '@gmail.com'
+    email_input = functions.find(driver, RegistrationFormPage.EMAIL_MOB_PHONE)
+    email_input.send_keys(email)
+    # шаг 6
+    password = functions.find(driver, RegistrationFormPage.PASSWORD)
+    password_generation = functions.get_random_string(14)
+    password.send_keys(password_generation)
+
+    # шаг 7
+    password_confirm = functions.find(driver, RegistrationFormPage.PASSWORD_CONFIRM)
+    password_confirm.send_keys(password_generation)
+
+    # шаг 8
+    register_button = functions.find(driver, RegistrationFormPage.REGISTER_BUTTON).click()
+    check_email_text = functions.find(driver, SubmitEmail.EMAIL_CONFIRMATION)
+    assert check_email_text.text == "Подтверждение email"
+
+
+# ТК-16
+def test_user_registration_with_name_29_characterss(open_rostelecom_page):
+    driver = open_rostelecom_page
+
+    # шаг 1
+    register_link = functions.find(driver, RostelecomAuthorizationPage.REGISTRATION_LINK)
+    register_link.click()
+
+    # шаг 2
+    name = functions.find(driver, RegistrationFormPage.NAME)
+    name.send_keys("Вамавывывывывывкуукукавамсмав")
+
+    # шаг 3
+    surname = functions.find(driver, RegistrationFormPage.SURNAME)
+    surname.send_keys('Чакмелов')
+
+    # шаг 4
+    region = functions.find(driver, RegistrationFormPage.REGION_INPUT)
+    region.send_keys("Москва")
+    region_select = functions.find(driver, RegistrationFormPage.REGION_SELECT)
+    region_select.click()
+
+    # шаг 5
+    email = functions.get_random_string(8) + '@gmail.com'
+    email_input = functions.find(driver, RegistrationFormPage.EMAIL_MOB_PHONE)
+    email_input.send_keys(email)
+    # шаг 6
+    password = functions.find(driver, RegistrationFormPage.PASSWORD)
+    password_generation = functions.get_random_string(14)
+    password.send_keys(password_generation)
+
+    # шаг 7
+    password_confirm = functions.find(driver, RegistrationFormPage.PASSWORD_CONFIRM)
+    password_confirm.send_keys(password_generation)
+
+    # шаг 8
+    register_button = functions.find(driver, RegistrationFormPage.REGISTER_BUTTON).click()
+    check_email_text = functions.find(driver, SubmitEmail.EMAIL_CONFIRMATION)
+    assert check_email_text.text == "Подтверждение email"
+
+
+# ТК-17
+def test_user_registration_with_name_30_characterss(open_rostelecom_page):
+    driver = open_rostelecom_page
+
+    # шаг 1
+    register_link = functions.find(driver, RostelecomAuthorizationPage.REGISTRATION_LINK)
+    register_link.click()
+
+    # шаг 2
+    name = functions.find(driver, RegistrationFormPage.NAME)
+    name.send_keys("Абдурахманалакучикалабдулагадж")
+
+    # шаг 3
+    surname = functions.find(driver, RegistrationFormPage.SURNAME)
+    surname.send_keys('Чакмелов')
+
+    # шаг 4
+    region = functions.find(driver, RegistrationFormPage.REGION_INPUT)
+    region.send_keys("Москва")
+    region_select = functions.find(driver, RegistrationFormPage.REGION_SELECT)
+    region_select.click()
+
+    # шаг 5
+    email = functions.get_random_string(8) + '@gmail.com'
+    email_input = functions.find(driver, RegistrationFormPage.EMAIL_MOB_PHONE)
+    email_input.send_keys(email)
+    # шаг 6
+    password = functions.find(driver, RegistrationFormPage.PASSWORD)
+    password_generation = functions.get_random_string(14)
+    password.send_keys(password_generation)
+
+    # шаг 7
+    password_confirm = functions.find(driver, RegistrationFormPage.PASSWORD_CONFIRM)
+    password_confirm.send_keys(password_generation)
+
+    # шаг 8
+    register_button = functions.find(driver, RegistrationFormPage.REGISTER_BUTTON).click()
+    check_email_text = functions.find(driver, SubmitEmail.EMAIL_CONFIRMATION)
+    assert check_email_text.text == "Подтверждение email"
+
+
+# ТК-18
+def test_user_registration_with_name_31_characterss_negative(open_rostelecom_page):
+    driver = open_rostelecom_page
+
+    # шаг 1
+    register_link = functions.find(driver, RostelecomAuthorizationPage.REGISTRATION_LINK)
+    register_link.click()
+
+    # шаг 2
+    name = functions.find(driver, RegistrationFormPage.NAME)
+    name.send_keys("Волхелегелштейнхаусенбергердорф")
+
+    # шаг 3
+    surname = functions.find(driver, RegistrationFormPage.SURNAME)
+    surname.send_keys('Вольке')
+
+    # шаг 4
+    region = functions.find(driver, RegistrationFormPage.REGION_INPUT)
+    region.send_keys("Москва")
+    region_select = functions.find(driver, RegistrationFormPage.REGION_SELECT)
+    region_select.click()
+
+    # шаг 5
+    email = functions.get_random_string(8) + '@gmail.com'
+    email_input = functions.find(driver, RegistrationFormPage.EMAIL_MOB_PHONE)
+    email_input.send_keys(email)
+    # шаг 6
+    password = functions.find(driver, RegistrationFormPage.PASSWORD)
+    password_generation = functions.get_random_string(14)
+    password.send_keys(password_generation)
+
+    # шаг 7
+    password_confirm = functions.find(driver, RegistrationFormPage.PASSWORD_CONFIRM)
+    password_confirm.send_keys(password_generation)
+
+    # шаг 8
+    register_button = functions.find(driver, RegistrationFormPage.REGISTER_BUTTON).click()
+    check_error_message = functions.find(driver, RegistrationFormPage.NAME_ERROR_MESSAGE)
+    assert check_error_message.text == "Необходимо заполнить поле кириллицей. От 2 до 30 символов."
