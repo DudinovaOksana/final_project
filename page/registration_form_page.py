@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-class RegistarionFormPage:
+class RegistrationFormPage:
     NAME = (By.XPATH, "//input[@name='firstName']")
     SURNAME = (By.XPATH, "//input[@name='lastName']")
     REGION_INPUT = (By.XPATH, "//input[@autocomplete='new-password']")
